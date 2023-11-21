@@ -1,11 +1,47 @@
-# Sample Snack app
+# HealHub - Projeto Integrador 2TDSPJ
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+## Descrição do Projeto
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
+HealHub é um projeto desenvolvido por alunos do curso de Tecnologia em Análise e Desenvolvimento de Sistemas da FIAP, no segundo semestre, em parceria com a Global Solution e a Hapvida NotreDame Intermédica. O objetivo principal do HealHub é facilitar e agilizar o processo de triagem em hospitais, proporcionando uma experiência mais eficiente para os pacientes e profissionais de saúde.
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
+O sistema visa contribuir para melhorias na prestação de cuidados de saúde, com ênfase na gestão eficiente de registros médicos, avanços na pesquisa e desenvolvimento, saúde móvel, IA para melhorar o diagnóstico, IoT, monitoramento remoto e blockchain na saúde. Todas essas tecnologias estão alinhadas com o tema do projeto.
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
+Além disso, o HealHub integra o ChatGPT para auxiliar os usuários, respondendo dúvidas e fornecendo informações relevantes, promovendo uma abordagem inovadora na interação entre pacientes e o sistema de saúde.
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+## Funcionalidades Principais
+
+- **Triagem Eficiente:** O HealHub oferece um sistema de triagem avançado, permitindo uma avaliação rápida e precisa dos pacientes, priorizando casos urgentes.
+
+- **Consulta Ágil:** Com a triagem otimizada, as consultas tornam-se mais ágeis, melhorando a experiência tanto para os pacientes quanto para os profissionais de saúde.
+
+- **Integração do ChatGPT:** A integração do ChatGPT permite aos usuários esclarecer dúvidas, obter informações sobre procedimentos médicos e receber orientações de maneira instantânea.
+
+## Tecnologias Utilizadas
+
+- **Firebase:** Utilizado para armazenamento de dados e autenticação.
+
+- **React Native:** Framework utilizado para a construção da interface do usuário.
+
+- **ChatGPT:** Modelo de linguagem da OpenAI para proporcionar interações naturais e informativas no chat.
+
+## Instalação
+
+1. Clone o repositório: `git clone https://github.com/santificado/healhub`
+
+2. Instale as dependências: `npm install`
+
+3. Configure as credenciais do Firebase no arquivo `src/firebase.js`
+
+4. Inicie a aplicação: `npm start`
+
+## Equipe
+
+1. André Lucas de Oliveira Santi - RM94327
+2. Gabriel Henrique Nascimento Paulino Santos - RM94430
+3. Henrique Alves de Freitas - RM95725
+4. Luan Victor da Silva Sá - RM93057
+5. Ricardo Sung Hoon Kim - RM94190
+
+## Links
+
+- Snack Expo: [https://snack.expo.dev/@santificado/healhub](https://snack.expo.dev/@santificado/healhub)
