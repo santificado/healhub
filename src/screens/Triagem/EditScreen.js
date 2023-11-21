@@ -36,7 +36,7 @@ const EditScreen = () => {
         const parsedHistory = JSON.parse(history);
         parsedHistory[index] = editedData;
         await AsyncStorage.setItem('history', JSON.stringify(parsedHistory));
-        navigation.goBack(); // Navigate back to the history page
+        navigation.goBack(); 
       }
     } catch (error) {
       console.error('Error saving edited data:', error);
