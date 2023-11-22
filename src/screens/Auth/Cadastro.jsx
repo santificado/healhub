@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Pressable, TouchableOpacity } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
-import auth  from '../../../config';
-const logoSource = require('../assets/Logo_Healhub.png');
 import firebase from 'firebase';
+
+const logoSource = require('../assets/Logo_Healhub.png');
 
 const LogoImage = styled.Image`
   width: 100px;
@@ -16,24 +16,43 @@ const LogoImage = styled.Image`
 const Cadastro = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
-  const [telefone, setTelefone] = useState('');
   const [password, setPassword] = useState('');
-  const [app, setApp] = useState(null);
+  const [error, setError] = useState('');
 
-  async function handleCadastro() {
+  const validateEmail = () => {
+    // Adicione uma expressão regular para verificar o formato do email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = () => {
+    // Verifique se a senha tem pelo menos 8 caracteres
+    return password.length >= 8;
+  };
+
+  const handleCadastro = async () => {
+    if (!validateEmail()) {
+      setError('Email mal formatado. Por favor, insira um email válido.');
+      return;
+    }
+
+    if (!validatePassword()) {
+      setError('A senha deve ter pelo menos 8 caracteres.');
+      return;
+    }
+
     try {
-      // Use the createUserWithEmailAndPassword method from the imported firebase object
       await firebase.auth().createUserWithEmailAndPassword(email, password);
       alert('Usuário cadastrado com sucesso!');
     } catch (error) {
       console.error('Erro ao cadastrar usuário:', error);
       alert('Erro ao cadastrar usuário. Tente novamente mais tarde.');
     }
-  }
+  };
 
-  function handleLogin() {
+  const handleLogin = () => {
     navigation.navigate('Login');
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -52,12 +71,13 @@ const Cadastro = () => {
         onChangeText={setPassword}
         style={styles.input}
       />
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <TouchableOpacity style={styles.loginButton} onPress={handleCadastro}>
         <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
-      <Pressable onPress={handleLogin}>
+      <TouchableOpacity onPress={handleLogin}>
         <Text style={styles.buttonText}>Já tem uma conta? Entre</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -69,7 +89,6 @@ const styles = {
     alignItems: 'center',
     padding: 16,
     backgroundColor: '#232323',
-    paddingBottom: '318px',
   },
   title: {
     fontSize: 24,
@@ -92,6 +111,10 @@ const styles = {
     padding: 10,
     borderRadius: 5,
     width: '100%',
+    marginBottom: 16,
+  },
+  errorText: {
+    color: 'red',
     marginBottom: 16,
   },
 };

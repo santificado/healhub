@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Pressable, TouchableOpacity } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Pressable } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
-import { auth } from '../../../config';
+import firebase from 'firebase';
+
 const logoSource = require('../assets/Logo_Healhub.png');
-import  firebase  from 'firebase';
 
 const LogoImage = styled.Image`
   width: 100px;
@@ -17,8 +17,28 @@ const Login = ({ setIsLogged }) => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-async function handleLogin() {
+  const validateEmail = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = () => {
+    return password.length >= 8;
+  };
+
+  const handleLogin = async () => {
+    if (!validateEmail()) {
+      setError('E-mail mal formatado. Por favor, insira um e-mail válido.');
+      return;
+    }
+
+    if (!validatePassword()) {
+      setError('A senha deve ter pelo menos 8 caracteres.');
+      return;
+    }
+
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       navigation.navigate('Main');
@@ -26,13 +46,19 @@ async function handleLogin() {
       alert('Usuário logado com sucesso');
     } catch (error) {
       console.error('Erro ao fazer login:', error.message);
+
+      // Verifica se o erro é de e-mail ou senha não cadastrados
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        setError('E-mail ou senha não cadastrados. Verifique suas credenciais e tente novamente.');
+      } else {
+        setError('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
+      }
     }
-  }
+  };
 
-  function handleCadastro() {
+  const handleCadastro = () => {
     navigation.navigate('Cadastro');
-  }
-
+  };
 
   return (
     <View style={styles.container}>
@@ -51,6 +77,7 @@ async function handleLogin() {
         onChangeText={setPassword}
         style={styles.input}
       />
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
@@ -68,7 +95,6 @@ const styles = {
     alignItems: 'center',
     padding: 16,
     backgroundColor: '#232323',
-    paddingBottom: 318,
   },
   title: {
     fontSize: 24,
@@ -91,6 +117,10 @@ const styles = {
     padding: 10,
     borderRadius: 5,
     width: '100%',
+    marginBottom: 16,
+  },
+  errorText: {
+    color: 'red',
     marginBottom: 16,
   },
 };
