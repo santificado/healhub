@@ -3,8 +3,7 @@ import { View, Text, TouchableOpacity, Pressable } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
-import firebase from 'firebase';
-
+import { auth } from '../../../config';
 const logoSource = require('../assets/Logo_Healhub.png');
 
 const LogoImage = styled.Image`
@@ -40,7 +39,7 @@ const Login = ({ setIsLogged }) => {
     }
 
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
+      await auth.signInWithEmailAndPassword(email, password);
       navigation.navigate('Main');
       setIsLogged(true);
       alert('Usuário logado com sucesso');

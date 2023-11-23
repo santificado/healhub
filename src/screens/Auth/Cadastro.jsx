@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
-import firebase from 'firebase';
+import { auth } from '../../../config';
 
 const logoSource = require('../assets/Logo_Healhub.png');
 
@@ -22,7 +22,7 @@ const Cadastro = () => {
   const validateEmail = () => {
     // Adicione uma expressão regular para verificar o formato do email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+        return emailRegex.test(email);
   };
 
   const validatePassword = () => {
@@ -42,7 +42,7 @@ const Cadastro = () => {
     }
 
     try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      await auth.createUserWithEmailAndPassword(email, password);
       alert('Usuário cadastrado com sucesso!');
     } catch (error) {
       console.error('Erro ao cadastrar usuário:', error);

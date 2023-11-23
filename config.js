@@ -1,5 +1,10 @@
-import firebase from 'firebase';
-
+import { initializeApp } from 'firebase/app'
+import {
+  getReactNativePersistence,
+  initializeAuth
+} from 'firebase/auth/react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+ 
 const firebaseConfig = {
   apiKey: "AIzaSyDj0coLMetdxKVXGUYGG9g_T1Kmm70rQUA",
   authDomain: "gs-healhub.firebaseapp.com",
@@ -9,9 +14,8 @@ const firebaseConfig = {
   appId: "1:218552184987:web:f6878e13708240e4a2163e",
   measurementId: "G-N3FHTFSQJQ"
 };
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-
-export { firebase }; 
+ 
+export const app = initializeApp(firebaseConfig)
+export const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage)
+})
