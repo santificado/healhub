@@ -34,7 +34,7 @@ const Login = ({ setIsLogged }) => {
       if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
         setError('E-mail ou senha não cadastrados. Verifique suas credenciais e tente novamente.');
       } else {
-        setErrosr('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
+        setError('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
       }
     }
   };
@@ -71,7 +71,7 @@ const Login = ({ setIsLogged }) => {
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -106,6 +106,6 @@ const styles = {
     color: 'red',
     marginBottom: 16,
   },
-};
+});
 
 export default Login;
