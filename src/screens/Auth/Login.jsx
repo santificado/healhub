@@ -3,7 +3,9 @@ import { View, Text, TouchableOpacity, Pressable } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
-import { auth } from '../../../config';
+import { app } from '../../../config';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
 const logoSource = require('../assets/Logo_Healhub.png');
 
 const LogoImage = styled.Image`
@@ -18,39 +20,21 @@ const Login = ({ setIsLogged }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const validateEmail = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePassword = () => {
-    return password.length >= 8;
-  };
-
   const handleLogin = async () => {
-    if (!validateEmail()) {
-      setError('E-mail mal formatado. Por favor, insira um e-mail válido.');
-      return;
-    }
-
-    if (!validatePassword()) {
-      setError('A senha deve ter pelo menos 8 caracteres.');
-      return;
-    }
+    const auth = getAuth(app);
 
     try {
-      await auth.signInWithEmailAndPassword(email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       navigation.navigate('Main');
       setIsLogged(true);
       alert('Usuário logado com sucesso');
     } catch (error) {
       console.error('Erro ao fazer login:', error.message);
 
-      // Verifica se o erro é de e-mail ou senha não cadastrados
       if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
         setError('E-mail ou senha não cadastrados. Verifique suas credenciais e tente novamente.');
       } else {
-        setError('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
+        setErrosr('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
       }
     }
   };

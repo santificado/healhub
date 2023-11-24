@@ -10,32 +10,26 @@ const styles = {
     alignItems: 'center',
     padding: 16,
     backgroundColor: '#232323',
-    paddingBottom: '320px',
-  },
-  section: {
-    marginBottom: 20,
   },
   label: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
     color:'white'
   },
   input: {
-    height: '90%', 
-    width: '100%',
     borderColor: '#ddd',
     borderWidth: 1,
-    marginBottom: 15,
     padding: 10,
     fontSize: 15, 
     backgroundColor: '#fff', 
     borderRadius: 5,
+    paddinBottom: '200px'
   },
   button: {
     backgroundColor: '#4CAF50',
     padding: 15,
     borderRadius: 8,
+    paddinTop: '10px'
   },
   buttonText: {
     color: '#fff',
