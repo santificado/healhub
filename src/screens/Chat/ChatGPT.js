@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity } from 'r
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
-const apiKey = ''; // Substitua pelo seu token de API OpenAI
+const apiKey = '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'; // Substitua pelo seu token de API OpenAI
 const apiURL = 'https://api.openai.com/v1/engines/text-davinci-002/completions';
 
 const ChatMessage = ({ type, text }) => (

@@ -71,7 +71,7 @@ const Login = ({ setIsLogged }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -106,6 +106,6 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 16,
   },
-});
+};
 
 export default Login;
