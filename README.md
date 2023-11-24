@@ -45,3 +45,4 @@ Além disso, o HealHub integra o ChatGPT para auxiliar os usuários, respondendo
 ## Links
 
 - Snack Expo: [https://snack.expo.dev/@santificado/healhub](https://snack.expo.dev/@santificado/healhub)
+- Youtube: [https://youtu.be/BrYtzkxRcb8](https://youtu.be/BrYtzkxRcb8)
